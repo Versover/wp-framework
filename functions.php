@@ -88,6 +88,28 @@ if ( ! function_exists( 'versover_post_meta' ) ) {
             if ( $category_list ) {
                 echo '<li class="meta-categories">' . $category_list . '</li>';
             }
+
+            // the tags
+            $tag_list = get_the_tag_list( '', ', ' );
+            if ( $tag_list ) {
+                echo '<li class="meta-tags">' . $tag_list . '</li>';
+            }
+
+            // comments link
+            if ( comments_open() ) {
+                echo '<li>';
+                echo '<span class="meta-reply">';
+                comments_popup_link( __( 'Leave a comment', 'versover' ), __( 'One comment so far', 'versover' ), __( 'View all % comments', 'versover' ) );
+                echo '</span>';
+                echo '</li>';
+            }
+
+            // edit link
+            if ( is_user_logged_in() ) {
+                echo '<li>';
+                edit_post_link( __( 'Edit', 'versover' ), '<span class="meta-edit">', '</span>' );
+                echo '</li>';
+            }
         }
     }
 }
