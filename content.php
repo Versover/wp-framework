@@ -28,4 +28,28 @@
             ?>
         </p>
     </header> <!-- end entry header -->
+
+    <!-- article content -->
+    <div class="entry-content">
+        <?php
+            if ( is_search() ) {
+                the_excerpt();
+            } else {
+                the_content( __( 'Continue reading &rarr;', 'versover' ) );
+
+                wp_link_pages();
+            }
+        ?>
+    </div> <!-- /article content -->
+
+    <!-- article footer -->
+    <footer class="entry-footer">
+        <?php
+            // if we have a single page and the author bio exists, display it
+            if ( is_single() && get_the_author_meta( 'description' ) ) {
+                echo '<h2>' . __( 'Written by ', 'versover' ) . get_the_author() . '</h2>';
+                echo '<p>' . the_author_meta( 'description' ) . '</p>';
+            }
+        ?>
+    </footer> <!-- /article footer -->
 </article>
