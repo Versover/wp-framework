@@ -57,7 +57,7 @@ if ( !function_exists( 'versover_setup' ) ) {
 		) );
 	}
 
-	add_action( 'after_theme_setup', 'versover_setup' );
+	add_action( 'after_setup_theme', 'versover_setup' );
 }
 
 /**
@@ -112,4 +112,25 @@ if ( ! function_exists( 'versover_post_meta' ) ) {
             }
         }
     }
+}
+
+/**
+ * 6. Display pagination
+ */
+if ( ! function_exists( 'versover_paging_nav' ) ) {
+	function versover_paging_nav() { ?>
+		<ul>
+			<?php if ( get_preview_post_link() ) : ?>
+				<li class="next">
+					<?php previous_post_link( __( 'Newer Posts &rarr;', 'versover' ) ); ?>
+				</li>
+			<?php endif; ?>
+
+			<?php if ( get_next_post_link() ) : ?>
+				<li class="previous">
+					<?php next_post_link( __( '&larr; Newer Older', 'versover' ) ); ?>
+				</li>
+			<?php endif; ?>
+		</ul> <?php
+	}
 }

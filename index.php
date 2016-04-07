@@ -6,12 +6,20 @@
  */
 ?>
 
-<div class="main-content col-md-8" role="main">
-	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-		<?php get_template_part( 'content', get_post_format() ); ?>
-	<?php endwhile; ?>
+<?php get_header(); ?>
 
-	<?php else : ?>
-		<?php get_template_part( 'content', 'none' ); ?>
-	<?php endif; ?>
-</div> <!-- end main-content -->
+	<div class="main-content col-md-8" role="main">
+		<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+			<?php get_template_part( 'content', get_post_format() ); ?>
+		<?php endwhile; ?>
+
+		<?php versover_paging_nav(); ?>
+
+		<?php else : ?>
+			<?php get_template_part( 'content', 'none' ); ?>
+		<?php endif; ?>
+	</div> <!-- end main-content -->
+
+<?php get_sidebar(); ?>
+
+<?php get_footer(); ?>
