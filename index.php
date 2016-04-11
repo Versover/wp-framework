@@ -18,7 +18,7 @@
 		<?php else : ?>
 			<?php get_template_part( 'content', 'none' ); ?>
 		<?php endif; ?>
-	</div> <!-- end main-content -->
+	</div> <!-- /main-content -->
 
 <?php get_sidebar(); ?>
 

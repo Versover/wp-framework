@@ -165,3 +165,13 @@ if ( ! function_exists( 'versover_widget_init' ) ) {
 
     add_action( 'widgets_init', 'versover_widget_init' );
 }
+
+/**
+ * 8. Function that validates a field's length
+ */
+if ( ! function_exists( 'versover_validate_length' ) ) {
+	function versover_validate_length( $fieldValue, $minLength ) {
+		// First, remove trailing and leading whitespace
+		return ( strlen( trim( $fieldValue ) ) > $minLength );
+	}
+}
