@@ -175,3 +175,65 @@ if ( ! function_exists( 'versover_validate_length' ) ) {
 		return ( strlen( trim( $fieldValue ) ) > $minLength );
 	}
 }
+
+/**
+ * 9. Include the generated css in the page header
+ */
+if ( ! function_exists( 'versover_load_wp_head' ) ) {
+	function versover_load_wp_head() {
+		// get the logo
+		$logo        = IMAGES . '/logo.png';
+		$logo_retina = IMAGES . '/logo@2x.png';
+
+		$logo_size = getimagesize( $logo );
+		?>
+		<!-- logo css -->
+		<style>
+			.site-logo a {
+				background: transparent url( <?php echo $logo; ?> ) 0 0 no-repeat;
+				width: <?php echo $logo_size[0] ?>px;
+				height: <?php echo $logo_size[1] ?>px;
+				display: inline-block;
+			}
+
+			@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+			only screen and (-moz-min-device-pixel-ratio: 1.5),
+			only screen and (-o-min-device-pixel-ratio: 3/2),
+			only screen and (min-device-pixel-ratio: 1.5) {
+				.site-logo a {
+					background: transparent url( <?php echo $logo_retina; ?> ) 0 0 no-repeat;
+					background-size: <?php echo $logo_size[0]; ?>px <?php echo $logo_size[1]; ?>px;
+				}
+			}
+		</style>
+		<?php
+	}
+
+	add_action( 'wp_head', 'versover_load_wp_head' );
+}
+
+/**
+ * 10. Load the custom scripts for the theme
+ */
+if ( ! function_exists( 'versover_scripts' ) ) {
+	function versover_scripts() {
+		// adds support for pages with threaded comments
+		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+			wp_enqueue_script( 'comment-reply' );
+		}
+
+		// register scripts
+		wp_register_script( 'bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', array( 'jquery' ), false, true );
+		wp_register_script( 'alpha-custom', SCRIPTS . '/scripts.js', array( 'jquery' ), false, true );
+
+		// load the custom scripts
+		wp_enqueue_script( 'bootstrap-js' );
+		wp_enqueue_script( 'versover-custom' );
+
+		// load the stylesheets
+		wp_enqueue_style( 'font-awesome', THEMEROOT . '/css/font-awesome.min.css' );
+		wp_enqueue_style( 'versover-master', THEMEROOT . '/css/master.css' );
+	}
+
+	add_action( 'wp_enqueue_scripts', 'versover_scripts' );
+}

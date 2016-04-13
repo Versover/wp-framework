@@ -19,7 +19,6 @@
 	<title><?php wp_title( '|', true, 'right' ); ?><?php bloginfo( 'name' ); ?></title>
 	<meta name="description" content="<?php bloginfo( 'description' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/style.css">
 
 	<link rel="shortcut icon" href="<?php echo $favicon; ?>">
 
